@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <title>Página no encontrada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .error-container {
+            text-align: center;
+        }
+        .error-code {
+            font-size: 10rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+        .home-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Lo sentimos, la página que buscas no existe.</div>
+        <a href="/" class="btn btn-primary home-button">Volver al inicio</a>
+    </div>
+</body>
+
+</html>
