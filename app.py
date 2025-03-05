@@ -1,9 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
 from flask import g
 from config import DevelopmentConfig
 
+import forms
+from flask import request
 from models import db
 from models import Alumnos
 
@@ -15,10 +17,38 @@ csrf = CSRFProtect()
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    create_form = forms.UserForm2(request.form)
+    alumno = Alumnos.query.all()
+    return render_template("index.html", form=create_form, alumno=alumno)
+
+@app.route("/detalles", methods=['GET','POST'])
+def detalles():
+    create_form = forms.UserForm2(request.form)
+    if request.method == 'GET':
+        id = request.args.get('id')
+        alum1 = db.session.query(Alumnos).filter(Alumnos.id==id).first()
+        nom = alum1.nombre
+        ap = alum1.apaterno
+        em = alum1.email
+        return render_template("detalles.html", form=create_form, im=id, nom=nom, ap=ap, em=em)
+
+@app.route("/alumnos1", methods=['GET','POST'])
+def alumnos_view():
+    create_form = forms.UserForm2(request.form)
+    if request.method == 'POST':
+        alumno = Alumnos(
+            nombre=create_form.nombre.data,
+            apaterno=create_form.apaterno.data,
+            email=create_form.email.data
+        )
+        db.session.add(alumno)
+        db.session.commit()
+        flash('Alumno registrado correctamente')
+        return redirect(url_for('index'))
+    return render_template("Alumnos.html", form=create_form)
 
 if __name__ == '__main__':
     csrf.init_app(app)
