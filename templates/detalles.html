@@ -1,19 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-    <a href="index">
-        <img class="rounded-t-lg" src="../static/img/{{im}}.jpg" alt="img" />
-    </a>
-    <div class="p-5">
-        <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">ALUMNO</h5>
-        </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> El alumno: {{nom}} {{ap}} tiene el correo {{em}}</p>
+<div class="flex justify-center items-center min-h-screen">
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ nom }} {{ ape }}</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400">{{ mail }}</p>
     </div>
 </div>
-    
-
-{%endblock%}
+{% endblock %}
